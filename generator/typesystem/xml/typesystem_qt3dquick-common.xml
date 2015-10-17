@@ -1,0 +1,110 @@
+<?xml-stylesheet type="text/xsl" href="merge.xsl"?>
+<typesystem>
+	<rejection class="" enum-name="QtValidLicenseForQt3DQuickModule"/>
+	<rejection class="QDeclarativeItem3D" function-name="data"/>
+	<rejection class="QDeclarativeItem3D" field-name="data"/>
+	<rejection class="QDeclarativeItem3D" function-name="resources"/>
+	<rejection class="QDeclarativeItem3D" field-name="resources"/>
+	<rejection class="QDeclarativeItem3D" function-name="pretransform"/>
+	<rejection class="QDeclarativeItem3D" field-name="pretransform"/>
+	<rejection class="QDeclarativeItem3D" field-name="transform"/>
+	<rejection class="QDeclarativeItem3D" function-name="transform"/>
+	<rejection class="QDeclarativeItem3D" function-name="x"/>
+	<rejection class="QDeclarativeItem3D" function-name="y"/>
+	<rejection class="QDeclarativeItem3D" function-name="z"/>
+	<rejection class="QDeclarativeItem3D" function-name="setX"/>
+	<rejection class="QDeclarativeItem3D" function-name="setY"/>
+	<rejection class="QDeclarativeItem3D" function-name="setZ"/>
+	<rejection class="QDeclarativeItem3D" function-name="setScale"/>
+	<rejection class="QDeclarativeItem3D" function-name="setEnabled"/>
+	<rejection class="QDeclarativeItem3D" function-name="scaleChanged"/>
+	<rejection class="QDeclarativeItem3D" function-name="scale"/>
+	<rejection class="QDeclarativeItem3D" function-name="rotationChanged"/>
+	<rejection class="QDeclarativeItem3D" function-name="isEnabled"/>
+	<rejection class="QDeclarativeItem3D" function-name="enabledChanged"/>
+	<rejection class="QDeclarativeEffect" function-name="ensureMaterial"/>
+	
+	
+	<enum-type name="QDeclarativeItem3D::CullFace" flags="QDeclarativeItem3D::CullFaces"/>
+	<enum-type name="QDeclarativeItem3D::SortMode"/>
+	
+   <interface-type name="QDeclarativeViewport" />
+   
+   <object-type name="QDeclarativeView3D" />
+   <object-type name="QDeclarativeMesh">
+		<modify-function signature="draw(QGLPainter *, int)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="setScene(QGLAbstractScene*)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="cplusplus"/>
+			</modify-argument>
+		</modify-function>
+   </object-type>
+   <object-type name="QDeclarativeItem3D">
+        <modify-function signature="draw(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="initialize(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawLightingSetup(QGLPainter *, const QGLLightParameters *, QMatrix4x4 &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawLightingCleanup(QGLPainter *, const QGLLightParameters *, QMatrix4x4 &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawEffectSetup(QGLPainter *, bool &amp;, bool &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawEffectCleanup(QGLPainter *, bool &amp;, bool &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawChildren(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawItem(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawTransformSetup(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="drawTransformCleanup(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="event(QEvent *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="setEffect( QDeclarativeEffect *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcEffect"/>
+            </modify-argument>
+        </modify-function>
+		<modify-function signature="setLight( QGLLightParameters *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcLight"/>
+            </modify-argument>
+        </modify-function>
+		<modify-function signature="setMesh( QDeclarativeMesh *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcMesh"/>
+            </modify-argument>
+        </modify-function>
+   </object-type>
+   <object-type name="QDeclarativeEffect">
+        <modify-function signature="enableEffect(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="disableEffect(QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="setMaterial( QGLMaterial *)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="cplusplus"/>
+			</modify-argument>
+		</modify-function>
+   </object-type>
+   <!--suppress-warning text="WARNING(MetaJavaBuilder) :: Class '*' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." /-->
+   <suppress-warning text="WARNING(MetaJavaBuilder) :: Object type '*' passed as value. Resulting code will not compile." />
+   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function 'QDeclarativeListProperty::QDeclarativeListProperty', unmatched parameter type 'QDeclarativeListProperty&lt;T>::AppendFunction'"/>
+</typesystem>

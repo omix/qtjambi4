@@ -1,0 +1,57 @@
+<typesystem package="com.trolltech.qt.qt3dquick" default-superclass="com.trolltech.qt.internal.QtJambiObject">
+    <inject-code>
+		com.trolltech.qt.Utilities.loadQtLibrary("QtCore");
+        com.trolltech.qt.Utilities.loadQtLibrary("QtGui");
+		com.trolltech.qt.Utilities.loadQtLibrary("QtNetwork");
+	    com.trolltech.qt.Utilities.loadQtLibrary("QtOpenGL");
+        com.trolltech.qt.Utilities.loadQtLibrary("QtSql");
+        com.trolltech.qt.Utilities.loadQtLibrary("QtScript");
+        com.trolltech.qt.Utilities.loadQtLibrary("QtXmlPatterns");
+        if(com.trolltech.qt.Utilities.isAvailableQtLibrary("QtSvg"))
+            com.trolltech.qt.Utilities.loadQtLibrary("QtSvg");
+		com.trolltech.qt.Utilities.loadQtLibrary("QtDeclarative");
+        com.trolltech.qt.Utilities.loadQtLibrary("Qt3D", null);
+		com.trolltech.qt.Utilities.loadQtLibrary("Qt3DQuick", null);
+    </inject-code>
+	
+	<object-type name="QDeclarativeItem3D">
+		<inject-code>
+            <import-file name="typesystem/java/typesystem_qt3dquick-java.java" quote-after-line="class QDeclarativeItem3D___java extends QDeclarativeItem3D {" quote-before-line="}// class"/>
+        </inject-code>
+		<modify-function signature="QDeclarativeItem3D(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+	<object-type name="QDeclarativeEffect">
+		<modify-function signature="QDeclarativeEffect(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="setMaterial(QGLMaterial *)">
+			<modify-argument index="1">
+                <define-ownership class="java" owner="cplusplus"/>
+            </modify-argument>
+		</modify-function>
+	</object-type>
+	<object-type name="QDeclarativeMesh">
+		<modify-function signature="QDeclarativeMesh(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+	<object-type name="QDeclarativeView3D">
+		<modify-function signature="QDeclarativeView3D(QWidget *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+</typesystem>

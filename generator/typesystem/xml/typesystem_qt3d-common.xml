@@ -1,0 +1,604 @@
+<?xml-stylesheet type="text/xsl" href="merge.xsl"?>
+<typesystem>
+	<rejection class="" enum-name="QtValidLicenseForQt3DModule"/>
+	<rejection class="QArray" function-name="copyData"/>
+	<rejection class="QArrayData" field-name="m_prealloc"/>
+   
+   <enum-type name="QGeometryData::BufferStrategyFlags" flags="QGeometryData::BufferStrategy"/>
+   <enum-type name="QGLAbstractScene::FormatListType"/>
+   <enum-type name="QGLCamera::ProjectionType"/>
+   <enum-type name="QGLCamera::RotateOrder"/>
+   <enum-type name="QGLLightModel::ColorControl"/>
+   <enum-type name="QGLLightModel::Model"/>
+   <enum-type name="QGLLightModel::ViewerPosition"/>
+   <enum-type name="QGLLightParameters::LightType"/>
+   <enum-type name="QGLMaterial::TextureCombineMode"/>
+   <enum-type name="QGLTextureCube::Face"/>
+   <enum-type name="QGLView::StereoType"/>
+   <enum-type name="QGLAbstractSurface::SurfaceType"/>
+	<enum-type name="QGLColladaFxEffect::Lighting"/>
+   
+   <enum-type name="QGLPainter::Update" flags="QGLPainter::Updates"/>
+   <enum-type name="QGLSceneNode::Option" flags="QGLSceneNode::Options"/>
+   <enum-type name="QOpenGLFunctions::OpenGLFeature" flags="QOpenGLFunctions::OpenGLFeatures"/>
+   <enum-type name="QGLView::Option" flags="QGLView::Options"/>
+   
+	<enum-type name="QGL::DrawingMode">
+	</enum-type>
+	<enum-type name="QGL::Eye">
+	</enum-type>
+	<enum-type name="QGL::Face">
+	</enum-type>
+	<enum-type name="QGL::Mouse3DKeys">
+	</enum-type>
+	<enum-type name="QGL::Smoothing">
+	</enum-type>
+	<enum-type name="QGL::StandardEffect">
+	</enum-type>
+	<enum-type name="QGL::TextureWrap">
+	</enum-type>
+	<enum-type name="QGL::VertexAttribute">
+	</enum-type>
+   <enum-type name="QCustomDataArray::ElementType"/>
+	<!--enum-type name="QGL::Triangles">
+	</enum-type-->
+	<!--enum-type name="QGL::IndexArray">
+	</enum-type-->
+   
+   <namespace-type name="QGL">
+   <extra-includes>
+	<include file-name="qglnamespace.h" location="global"/>
+	<include file-name="QPaintEngine" location="global"/>
+	<include file-name="Qt3D/qgeometrydata.h" location="global"/>
+	</extra-includes>
+	<!--modify-function signature="fieldMask (QGL::VertexAttribute)" remove="all"/>
+	<modify-function signature="nextPowerOfTwo (const QSize &amp;)" remove="all"/>
+	<modify-function signature="nextPowerOfTwo (int)" remove="all"/-->
+   </namespace-type>
+   
+   <interface-type name="QGLSceneFormatFactoryInterface" java-name="QGLAbstractSceneFormatFactory"/>
+   
+   <!--value-type name="QArray" generate="no" />
+   <value-type name="QArrayData" generate="no" />
+   <value-type name="QVector2DArray" generate="no" />
+   <value-type name="QVector3DArray" generate="no" />
+   <value-type name="QVector4DArray" generate="no" /-->
+   <value-type name="QCustomDataArray">
+		<modify-function signature="operator=(const QCustomDataArray&amp;)" access="private"/>
+	</value-type>
+   
+   <value-type name="QColor4ub">
+		<modify-function signature="operator!=(const QColor4ub&amp;)const" access="private"/>
+		<modify-function signature="operator=(const QColor&amp;)" rename="setColor"/>
+		<modify-function signature="operator=(Qt::GlobalColor)" rename="setColor"/>
+	</value-type>
+   <value-type name="QGeometryData">
+		<modify-function signature="operator=(const QGeometryData&amp;)" access="private"/>
+	</value-type>
+   <value-type name="QGLAttributeValue"/>
+   <value-type name="QGLAttributeDescription" />
+   <value-type name="QGLAttributeSet" />
+   <value-type name="QGLBezierPatches">
+		<modify-function signature="operator=(const QGLBezierPatches&amp;)" access="private"/>
+	</value-type>
+   <value-type name="QGLCube" />
+   <value-type name="QGLCylinder" />
+   <value-type name="QGLDome" />
+   <value-type name="QGLSphere" />
+   <value-type name="QGLTeapot" />
+   <value-type name="QGLIndexBuffer">
+		<modify-function signature="operator=(const QGLIndexBuffer&amp;)" access="private"/>
+	</value-type>
+   <value-type name="QGLRenderOrder" delete-in-main-thread="yes">
+	<custom-constructor>
+		return new QGLRenderOrder(copy->node(), copy->state());
+	</custom-constructor>
+    <custom-destructor>
+		delete copy;
+    </custom-destructor>
+   </value-type>
+   <value-type name="QGLRenderOrderComparator" />
+   <value-type name="QGLRenderState" delete-in-main-thread="yes">
+		<modify-function signature="operator=(const QGLRenderState&amp;)" access="private"/>
+	</value-type>
+   <object-type name="QGLRenderSequencer" delete-in-main-thread="yes" />
+   <value-type name="QGLVertexBundle">
+		<modify-function signature="operator=(const QGLVertexBundle&amp;)" access="private"/>
+	</value-type>
+   <value-type name="QBox3D" />
+   <value-type name="QPlane3D" />
+   <value-type name="QRay3D" />
+   <value-type name="QSphere3D" />
+   <value-type name="QTriangle3D" />
+   
+   <object-type name="QGLTextureCube" />
+   <object-type name="QGLAbstractSurface" delete-in-main-thread="yes" />
+   <object-type name="QGLWidgetSurface" delete-in-main-thread="yes">
+		<modify-function signature="QGLWidgetSurface(QGLWidget *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcWidget"/>
+            </modify-argument>
+		</modify-function>
+		<modify-function signature="setWidget(QGLWidget *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcWidget"/>
+            </modify-argument>
+		</modify-function>
+   </object-type>
+   <object-type name="QGLFramebufferObjectSurface" delete-in-main-thread="yes">
+		<modify-function signature="QGLFramebufferObjectSurface(QGLFramebufferObject *, const QGLContext *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcFramebufferObject"/>
+            </modify-argument>
+		</modify-function>
+		<modify-function signature="setFramebufferObject(QGLFramebufferObject *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcFramebufferObject"/>
+            </modify-argument>
+		</modify-function>
+   </object-type>
+   <object-type name="QGLPixelBufferSurface" delete-in-main-thread="yes">
+		<modify-function signature="QGLPixelBufferSurface(QGLPixelBuffer *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcPixelBuffer"/>
+            </modify-argument>
+		</modify-function>
+		<modify-function signature="setPixelBuffer(QGLPixelBuffer *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcPixelBuffer"/>
+            </modify-argument>
+		</modify-function>
+   </object-type>
+   <object-type name="QGLSubsurface" delete-in-main-thread="yes">
+		<modify-function signature="QGLSubsurface(QGLAbstractSurface *, QRect)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcSurface"/>
+            </modify-argument>
+		</modify-function>
+		<modify-function signature="setSurface(QGLAbstractSurface *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcSurface"/>
+            </modify-argument>
+		</modify-function>
+   </object-type>
+   <object-type name="QGLAbstractEffect">
+        <modify-function signature="setActive ( QGLPainter *, bool )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="update ( QGLPainter *, QFlags&lt;QGLPainter::Update>)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+	</object-type>
+   <object-type name="QGLShaderProgramEffect">
+        <modify-function signature="setActive ( QGLPainter *, bool )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="update ( QGLPainter *, QFlags&lt;QGLPainter::Update>)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+	</object-type>
+   <object-type name="QGLColladaFxEffect">
+        <modify-function signature="setActive ( QGLPainter *, bool )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="update ( QGLPainter *, QFlags&lt;QGLPainter::Update>)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+	</object-type>
+   <object-type name="QGLColladaFxEffectLoader" />
+   <object-type name="QMatrix4x4Stack">
+		<extra-includes>
+            <include file-name="com.trolltech.qt.gui.QMatrix4x4" location="java"/>
+        </extra-includes>
+		<modify-function signature="operator=(const QMatrix4x4&amp;)" rename="set"/>
+   </object-type>
+   <object-type name="QGLAbstractMaterial">
+		<modify-function signature="QGLAbstractMaterial(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+        <modify-function signature="bind ( QGLPainter * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="prepareToDraw ( QGLPainter *, const QGLAttributeSet &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="release ( QGLPainter *, QGLAbstractMaterial *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+	</object-type>
+   <object-type name="QGLColorMaterial">
+		<modify-function signature="QGLColorMaterial(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+        <modify-function signature="bind ( QGLPainter * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="prepareToDraw ( QGLPainter *, const QGLAttributeSet &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="release ( QGLPainter *, QGLAbstractMaterial *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+	</object-type>
+   <object-type name="QGLTwoSidedMaterial">
+		<modify-function signature="QGLTwoSidedMaterial(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+        <modify-function signature="bind ( QGLPainter * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="prepareToDraw ( QGLPainter *, const QGLAttributeSet &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="release ( QGLPainter *, QGLAbstractMaterial *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="setBack( QGLMaterial *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcBack"/>
+            </modify-argument>
+        </modify-function>
+		<modify-function signature="setFront( QGLMaterial *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcFront"/>
+            </modify-argument>
+        </modify-function>
+	</object-type>
+   <object-type name="QGLMaterial">
+		<modify-function signature="QGLMaterial(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+        <modify-function signature="bind ( QGLPainter * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="prepareToDraw ( QGLPainter *, const QGLAttributeSet &amp;)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="release ( QGLPainter *, QGLAbstractMaterial *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="setTexture(QGLTexture2D *, int)">
+			<inject-code position="beginning">
+                <argument-map index="2" meta-name="%var"/>
+                __rcTextures.remove(texture(%var));
+            </inject-code>
+			<modify-argument index="1">
+                <reference-count action="add" variable-name="__rcTextures"/>
+            </modify-argument>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLMaterialCollection">
+		<modify-function signature="QGLMaterialCollection(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLAbstractScene" delete-in-main-thread="yes">
+		<modify-function signature="QGLAbstractScene(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLBuilder">
+		<modify-function signature="finalizedSceneNode()">
+			<modify-argument index="return">
+                <define-ownership class="java" owner="java"/>
+            </modify-argument>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLCamera">
+		<modify-function signature="QGLCamera(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLCameraAnimation">
+		<modify-function signature="QGLCameraAnimation(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QAbstractDownloadManager">
+		<modify-function signature="QAbstractDownloadManager(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QDownloadManager">
+		<modify-function signature="QDownloadManager(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLView" delete-in-main-thread="yes">
+		<modify-function signature="QGLView(QWidget *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="QGLView(const QGLFormat &amp;, QWidget *)">
+			<inject-code position="end">
+                <argument-map index="2" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+        <modify-function signature="paintGL( QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="earlyPaintGL( QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="initializeGL( QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="keyPressEvent ( QKeyEvent * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="leaveEvent ( QEvent * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="mouseDoubleClickEvent ( QMouseEvent * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="mouseMoveEvent ( QMouseEvent * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="mousePressEvent ( QMouseEvent * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+        <modify-function signature="mouseReleaseEvent ( QMouseEvent * )">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+		<modify-function signature="setCamera(QGLCamera*)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcCamera"/>
+            </modify-argument>
+		</modify-function>
+	</object-type>
+   <object-type name="QGraphicsEmbedScene" delete-in-main-thread="yes">
+		<modify-function signature="QGraphicsEmbedScene(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="QGraphicsEmbedScene(const QRectF&amp;, QObject *)">
+			<inject-code position="end">
+                <argument-map index="2" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="QGraphicsEmbedScene(qreal, qreal, qreal, qreal, QObject *)">
+			<inject-code position="end">
+                <argument-map index="5" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLGraphicsViewportItem" delete-in-main-thread="yes">
+		<modify-function signature="QGLGraphicsViewportItem(QGraphicsItem *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="QGLGraphicsViewportItem(const QRectF&amp;, QGraphicsItem *)">
+			<inject-code position="end">
+                <argument-map index="2" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="QGLGraphicsViewportItem(qreal, qreal, qreal, qreal, QGraphicsItem *)">
+			<inject-code position="end">
+                <argument-map index="5" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="setCamera(QGLCamera*)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcCamera"/>
+            </modify-argument>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLLightModel">
+		<modify-function signature="QGLLightModel(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLLightParameters">
+		<modify-function signature="QGLLightParameters(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLPainter" />
+   <object-type name="QGLSceneFormatHandler" />
+   <object-type name="QGLSceneFormatPlugin">
+		<modify-function signature="QGLSceneFormatPlugin(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGLSceneNode" delete-in-main-thread="yes">
+		<modify-function signature="QGLSceneNode(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="QGLSceneNode(const QGeometryData &amp;, QObject *)">
+			<inject-code position="end">
+                <argument-map index="2" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+		<modify-function signature="addNode(QGLSceneNode *)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="cplusplus"/>
+			</modify-argument>
+		</modify-function>
+		<modify-function signature="removeNode(QGLSceneNode *)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="default"/>
+			</modify-argument>
+		</modify-function>
+		<modify-function signature="addNodes(const QList&lt;QGLSceneNode *>&amp;)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="cplusplus"/>
+			</modify-argument>
+		</modify-function>
+		<modify-function signature="removeNodes(const QList&lt;QGLSceneNode *>&amp;)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="default"/>
+			</modify-argument>
+		</modify-function>
+		<modify-function signature="setMaterial( QGLMaterial *)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="cplusplus"/>
+			</modify-argument>
+		</modify-function>
+		<modify-function signature="setBackMaterial( QGLMaterial *)">
+			<modify-argument index="1">
+				<define-ownership class="java" owner="cplusplus"/>
+			</modify-argument>
+		</modify-function>
+		<modify-function signature="addTransform ( QGraphicsTransform3D *)">
+			<modify-argument index="1">
+                <reference-count action="add" variable-name="__rcTransforms"/>
+            </modify-argument>
+        </modify-function>
+		<modify-function signature="setTransforms ( const QList&lt;QGraphicsTransform3D *> &amp;)">
+            <inject-code position="beginning">
+				__rcTransforms.clear();
+			</inject-code>
+			<modify-argument index="1">
+				<reference-count action="add-all" variable-name="__rcTransforms"/>
+            </modify-argument>
+        </modify-function>
+		<modify-function signature="setPickNode ( QGLPickNode *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcPickNode"/>
+            </modify-argument>
+        </modify-function>
+		<modify-function signature="setPalette( QGLMaterialCollection *)">
+			<modify-argument index="1">
+                <reference-count action="set" variable-name="__rcPalette"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="draw( QGLPainter *)">
+            <modify-argument index="1" invalidate-after-use="yes" />
+        </modify-function>
+	</object-type>
+   <object-type name="QGLPickNode">
+		<modify-function signature="QGLPickNode(QGLAbstractScene *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QOpenGLFunctions" />
+   <object-type name="QGLTexture2D" delete-in-main-thread="yes">
+		<modify-function signature="QGLTexture2D(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGraphicsTransform3D">
+		<modify-function signature="QGraphicsTransform3D(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGraphicsRotation3D">
+		<modify-function signature="QGraphicsRotation3D(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGraphicsScale3D">
+		<modify-function signature="QGraphicsScale3D(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGraphicsTranslation3D">
+		<modify-function signature="QGraphicsTranslation3D(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   <object-type name="QGraphicsBillboardTransform">
+		<modify-function signature="QGraphicsBillboardTransform(QObject *)">
+			<inject-code position="end">
+                <argument-map index="1" meta-name="%1"/>
+                if (%1 != null) disableGarbageCollection();
+            </inject-code>
+		</modify-function>
+	</object-type>
+   
+   <!--suppress-warning text="WARNING(MetaJavaBuilder) :: Class '*' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." /-->
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QGLAttributeSet' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QSphere3D' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QGeometryData' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QArray' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QVector2DArray' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QRay3D' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QPlane3D' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QTriangle3D' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QVector3DArray' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QBox3D' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QVector4DArray' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: Class 'QColor4ub' has equals operators but no qHash() function. Hashcode of objects will consistently be 0." />
+   <suppress-warning text="WARNING(MetaJavaBuilder) :: Object type '*' passed as value. Resulting code will not compile." />
+   <suppress-warning text="WARNING(MetaJavaBuilder) :: Unable to decide type of property: 'QDeclarativeListProperty&lt;*>' in class '*'" />
+   <suppress-warning text="WARNING(MetaJavaBuilder) :: enum 'QCustomDataArray::ElementType' does not have a type entry or is not an enum" />
+   <suppress-warning text="WARNING(MetaJavaBuilder) :: type 'QCustomDataArray::ElementType' is specified in typesystem, but not defined. This could potentially lead to compilation errors." />
+   <suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function 'QGeometryData::logicalVertexAt', unmatched return type 'QLogicalVertex'" />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function 'QGeometryData::appendVertex', unmatched parameter type 'QLogicalVertex const&amp;'" />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function 'QGLFormat::testOption', unmatched parameter type 'QGL::FormatOptions'" />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function 'QGLFormat::setOption', unmatched parameter type 'QGL::FormatOptions'" />
+	<suppress-warning text="WARNING(MetaJavaBuilder) :: skipping function 'QGLFormat::QGLFormat', unmatched parameter type 'QGL::FormatOptions'" />
+</typesystem>

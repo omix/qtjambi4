@@ -1,0 +1,174 @@
+<typesystem package="com.trolltech.qt.qt3d" default-superclass="com.trolltech.qt.internal.QtJambiObject">
+    <inject-code>
+		com.trolltech.qt.Utilities.loadQtLibrary("QtCore");
+        com.trolltech.qt.Utilities.loadQtLibrary("QtGui");
+		com.trolltech.qt.Utilities.loadQtLibrary("QtNetwork");
+	    com.trolltech.qt.Utilities.loadQtLibrary("QtOpenGL");
+        com.trolltech.qt.Utilities.loadQtLibrary("Qt3D", null);
+    </inject-code>
+	
+	<template name="qt3d.shiftoperator.java">
+		@QtBlockedSlot
+		public final void add%TYPE(com.trolltech.qt.qt3d.QGL%TYPE geometry)    {
+			if (nativeId() == 0)
+				throw new QNoNativeResourcesException("Function call on incomplete object of type: " +getClass().getName());
+			__qt_add%TYPE_QGL%TYPE(nativeId(), geometry == null ? 0 : geometry.nativeId());
+		}
+		@QtBlockedSlot
+		native void __qt_add%TYPE_QGL%TYPE(long __this__nativeId, long geometry);
+    </template>
+	<template name="qt3d.shiftoperator.native">
+// QGLBuilder::addCube(const QGLCube &amp; cube)
+extern "C" Q_DECL_EXPORT void JNICALL QTJAMBI_FUNCTION_PREFIX(Java_com_trolltech_qt_qt3d_QGLBuilder__1_1qt_1add%TYPE_1QGL%TYPE__JJ)
+(JNIEnv *__jni_env,
+ jobject,
+ jlong __this_nativeId,
+ jlong  geometry0)	
+{
+	QTJAMBI_DEBUG_TRACE("(native) entering: operator &lt;&lt; (QGLBuilder &amp; builder, const QGL%TYPE&amp; geometry)");
+	Q_UNUSED(__jni_env)
+	Q_UNUSED(__this_nativeId)
+	const QGL%TYPE&amp;  geometry = (const QGL%TYPE&amp; ) *(QGL%TYPE *)qtjambi_from_jlong(geometry0);
+	QTJAMBI_EXCEPTION_CHECK(__jni_env);
+	QGLBuilder* builder = (QGLBuilder *) qtjambi_from_jlong(__this_nativeId);
+	QTJAMBI_EXCEPTION_CHECK(__jni_env);
+	Q_ASSERT(builder);
+	*builder &lt;&lt; geometry;
+	QTJAMBI_DEBUG_TRACE("(native) -> leaving: operator &lt;&lt; (QGLBuilder &amp; builder, const QGL%TYPE&amp; geometry)");
+}
+	</template>
+	
+	<value-type name="QGLAttributeValue">
+	
+		<inject-code class="java">
+			<import-file name="typesystem/java/typesystem_qt3d-java.java" quote-after-line="class QGLAttributeValue___java" quote-before-line="}// class"/>
+		</inject-code>
+		<inject-code class="native">
+			<import-file name="typesystem/java/typesystem_qt3d-java.java" quote-after-line="class QGLAttributeValue___cplusplus" quote-before-line="}// class"/>
+		</inject-code>
+	
+	<modify-function signature="QGLAttributeValue ( const QArray&lt;float> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QGLAttributeValue ( const QArray&lt;QVector2D> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QGLAttributeValue ( const QArray&lt;QVector3D> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QGLAttributeValue ( const QArray&lt;QVector4D> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QGLAttributeValue ( const QArray&lt;QColor4ub> &amp; )" remove="java">
+    </modify-function>
+   </value-type>
+   
+   <value-type name="QCustomDataArray">
+		<inject-code class="java">
+			<import-file name="typesystem/java/typesystem_qt3d-java.java" quote-after-line="class QCustomDataArray___java" quote-before-line="}// class"/>
+		</inject-code>
+		<inject-code class="native">
+			<import-file name="typesystem/java/typesystem_qt3d-java.java" quote-after-line="class QCustomDataArray___cplusplus" quote-before-line="}// class"/>
+		</inject-code>
+	<modify-function signature="QCustomDataArray ( const QArray&lt;float> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QCustomDataArray ( const QArray&lt;QVector2D> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QCustomDataArray ( const QArray&lt;QVector3D> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QCustomDataArray ( const QArray&lt;QVector4D> &amp; )" remove="java">
+    </modify-function>
+    <modify-function signature="QCustomDataArray ( const QArray&lt;QColor4ub> &amp; )" remove="java">
+    </modify-function>
+   </value-type>
+   
+   <value-type name="QGLRenderOrder">
+	<modify-function signature="QGLRenderOrder(const QGLSceneNode *, const QGLRenderState &amp;)">
+        <modify-argument index="2">
+		<remove-default-expression/>
+		</modify-argument>
+    </modify-function>
+   </value-type>
+   
+   
+   <object-type name="QGLSceneNode">
+	<modify-function signature="children () const" rename="sceneNodeChildren"/>
+   </object-type>
+   
+   
+   <value-type name="QGLIndexBuffer">
+    <modify-function signature="indexesUInt () const" rename="indexes"/>
+	<modify-function signature="indexesUShort () const" remove="all"/>
+	<modify-function signature="setIndexes ( const QArray&lt;unsigned short> &amp;)" remove="all"/>
+	<modify-function signature="replaceIndexes ( int, const QArray&lt;unsigned short> &amp;)" remove="all"/>
+   </value-type>
+   
+   <value-type name="QGLVertexBundle">
+    <modify-function signature="addAttribute ( QGL::VertexAttribute, const QArray&lt;float> &amp; )" rename="addFloatAttribute"/>
+	<modify-function signature="addAttribute ( QGL::VertexAttribute, const QArray&lt;QVector2D> &amp; )" rename="addVector2DAttribute"/>
+	<modify-function signature="addAttribute ( QGL::VertexAttribute, const QArray&lt;QVector3D> &amp; )" rename="addVector3DAttribute"/>
+	<modify-function signature="addAttribute ( QGL::VertexAttribute, const QArray&lt;QVector4D> &amp; )" rename="addVector4DAttribute"/>
+	<modify-function signature="addAttribute ( QGL::VertexAttribute, const QArray&lt;QColor4ub> &amp; )" rename="addQColor4ubAttribute"/>
+   </value-type>
+   
+   <value-type name="QGeometryData">
+	<modify-function signature="vertexData() const" remove="all"/>
+	<modify-function signature="vertex(int)" remove="all"/>
+	<modify-function signature="vector2DAttribute(int, QGL::VertexAttribute)" remove="all"/>
+	<modify-function signature="vector3DAttribute(int, QGL::VertexAttribute)" remove="all"/>
+	<modify-function signature="texCoord(int, QGL::VertexAttribute)" remove="all"/>
+	<modify-function signature="normal(int)" remove="all"/>
+	<modify-function signature="color(int)" remove="all"/>
+	<modify-function signature="floatAttribute(int, QGL::VertexAttribute)" remove="all"/>
+   </value-type>
+   
+   <object-type name="QGLSceneFormatHandler">
+	<modify-function signature="finalize ()" rename="doFinalization"/>
+   </object-type>
+   
+   <object-type name="QGLBuilder">
+		<extra-includes>
+			<include file-name="Qt3D/qglcube.h" location="global"/>
+			<include file-name="Qt3D/qglcylinder.h" location="global"/>
+			<include file-name="Qt3D/qglbezierpatches.h" location="global"/>
+			<include file-name="Qt3D/qgldome.h" location="global"/>
+			<include file-name="Qt3D/qglsphere.h" location="global"/>
+		</extra-includes>
+		<modify-function signature="finalizedSceneNode()">
+			<modify-argument index="return">
+                <define-ownership class="java" owner="default"/>
+            </modify-argument>
+		</modify-function>
+		<inject-code class="java">
+		<insert-template name="qt3d.shiftoperator.java">
+            <replace from="%TYPE" to="Cube"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.java">
+            <replace from="%TYPE" to="BezierPatches"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.java">
+            <replace from="%TYPE" to="Cylinder"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.java">
+            <replace from="%TYPE" to="Dome"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.java">
+            <replace from="%TYPE" to="Sphere"/>
+        </insert-template>
+		</inject-code>
+		<inject-code class="native">
+		<insert-template name="qt3d.shiftoperator.native">
+            <replace from="%TYPE" to="Cube"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.native">
+            <replace from="%TYPE" to="BezierPatches"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.native">
+            <replace from="%TYPE" to="Cylinder"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.native">
+            <replace from="%TYPE" to="Dome"/>
+        </insert-template>
+		<insert-template name="qt3d.shiftoperator.native">
+            <replace from="%TYPE" to="Sphere"/>
+        </insert-template>
+		</inject-code>
+   </object-type>
+   
+</typesystem>

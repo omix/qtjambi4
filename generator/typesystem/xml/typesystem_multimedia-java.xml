@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<typesystem package="com.trolltech.qt.multimedia" default-superclass="com.trolltech.qt.internal.QtJambiObject">
+    <inject-code>
+        com.trolltech.qt.Utilities.loadQtLibrary("QtCore");
+        com.trolltech.qt.Utilities.loadQtLibrary("QtGui");
+        com.trolltech.qt.Utilities.loadQtLibrary("QtMultimedia");
+    </inject-code>
+<object-type name="QAbstractVideoSurface">
+<!--<modify-function signature="nearestFormat(const QVideoSurfaceFormat&amp;)const" remove="all">
+</modify-function>
+<modify-function signature="surfaceFormat()const" remove="all">
+</modify-function>-->
+</object-type>
+
+	<object-type name="QAudioInput">
+	<modify-function signature="QAudioInput(const QAudioFormat &amp;,QObject*)">
+            <modify-argument index="1">
+                <replace-default-expression with="new QAudioFormat()"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="QAudioInput(const QAudioDeviceInfo &amp;,const QAudioFormat &amp;,QObject*)">
+            <modify-argument index="2">
+                <replace-default-expression with="new QAudioFormat()"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="notify()" rename="notifySignal">
+        </modify-function>
+	</object-type>
+
+	<object-type name="QAudioOutput">
+	<modify-function signature="QAudioOutput(const QAudioFormat &amp;,QObject*)">
+            <modify-argument index="1">
+                <replace-default-expression with="new QAudioFormat()"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="QAudioOutput(const QAudioDeviceInfo &amp;,const QAudioFormat &amp;,QObject*)">
+            <modify-argument index="2">
+                <replace-default-expression with="new QAudioFormat()"/>
+            </modify-argument>
+        </modify-function>
+        <modify-function signature="notify()" rename="notifySignal">
+        </modify-function>
+	</object-type>
+
+	<value-type name="QAudioFormat">
+        <modify-function signature="operator=(const QAudioFormat)" remove="all"/>
+        <modify-function signature="operator==(const QAudioFormat)const" remove="all"/>
+        <modify-function signature="operator!=(const QAudioFormat)const" remove="all"/>
+	</value-type>
+	<value-type name="QVideoSurfaceFormat">
+        <modify-function signature="operator=(const QVideoSurfaceFormat)" remove="all"/>
+        <modify-function signature="operator==(const QVideoSurfaceFormat)const" remove="all"/>
+        <modify-function signature="operator!=(const QVideoSurfaceFormat)const" remove="all"/>
+		<modify-function signature="property(const char*) const">
+			<modify-argument index="1">
+				<replace-type modified-type="String" />
+                <conversion-rule class="native">
+				const char * %out = __jni_env->GetStringUTFChars((jstring)%in, NULL);
+				</conversion-rule>
+				<conversion-rule class="shell">
+				jobject %out = (jobject)__jni_env->NewStringUTF(%in);
+				</conversion-rule>
+			</modify-argument>
+		</modify-function>
+		<modify-function signature="setProperty(const char *, const QVariant &amp;)">
+			<modify-argument index="1">
+				<replace-type modified-type="String" />
+                <conversion-rule class="native">
+				const char * %out = __jni_env->GetStringUTFChars((jstring)%in, NULL);
+				</conversion-rule>
+				<conversion-rule class="shell">
+				jobject %out = (jobject)__jni_env->NewStringUTF(%in);
+				</conversion-rule>
+			</modify-argument>
+		</modify-function>
+	</value-type>
+	<object-type name="QVideoFrame">
+        <modify-function signature="bits()const" rename="bits_private" access="private" />
+		<modify-function signature="QVideoFrame(QAbstractVideoBuffer *,const QSize &amp;, QVideoFrame::PixelFormat)">
+			<modify-argument index="1">
+				<replace-type modified-type="com.trolltech.qt.multimedia.QAbstractVideoBuffer" />
+                <conversion-rule class="shell">
+                    jobject %out = qtjambi_from_object(__jni_env, %in, "QAbstractVideoBuffer", "com/trolltech/qt/gui/", false);
+                </conversion-rule>
+                <conversion-rule class="native">
+                    QAbstractVideoBuffer *%out = (QAbstractVideoBuffer *) qtjambi_to_object(__jni_env, %in);
+                </conversion-rule>
+			</modify-argument>
+		</modify-function>
+		<inject-code>
+		@QtBlockedSlot
+		private final byte[] bits(){
+			byte[] data = new byte[mappedBytes()];
+			com.trolltech.qt.QNativePointer pointer = bits_private();
+			for (int i = 0; i &lt; data.length; i++) {
+				data[i] = pointer.byteAt(i);
+			}
+			return data;
+		}
+        </inject-code>
+    </object-type>
+	
+    <suppress-warning text="WARNING(CppImplGenerator) :: protected function '*' in final class '*'" />
+    <suppress-warning text="WARNING(MetaJavaBuilder) :: visibility of function '*' modified in class '*'" />
+    <suppress-warning text="WARNING(MetaJavaBuilder) :: hiding of function '*' in class '*'" />
+</typesystem>
