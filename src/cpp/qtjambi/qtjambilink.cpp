@@ -715,6 +715,19 @@ void QtJambiLink::setMetaObject(const QMetaObject *mo) const
         qWarning("setMetaObject: No jambi user data in QObject, line %d in file '%s'", __LINE__, __FILE__);
 }
 
+
+void QtJambiLink::setSignalWrapper(QObject *ptr) {
+    QObject* qobj = qobject();
+    if(ptr && qobj && ptr->thread()!=qobj->thread()){
+        if(ptr->thread()==QThread::currentThread()){
+			ptr->moveToThread(qobj->thread());
+		}else{
+			return;
+		}
+    }
+    m_wrapper = ptr;
+}
+
 void QtJambiLink::setGlobalRef(JNIEnv *env, bool global)
 {
     if (global == m_global_ref)

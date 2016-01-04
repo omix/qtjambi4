@@ -3039,3 +3039,15 @@ jobject qtjambi_invoke_method(JNIEnv *env,
     };
 }
 
+void qtjambi_moveSignalWrapperToThread(QObject* object, QThread* thread)
+{
+
+    QtJambiLink *link = QtJambiLink::findLinkForQObject(object);
+    if(link && link->signalWrapper()){
+        link->signalWrapper()->moveToThread(thread);
+    }
+
+    foreach(QObject* child , object->children()){
+        qtjambi_moveSignalWrapperToThread(child, thread);
+    }
+}

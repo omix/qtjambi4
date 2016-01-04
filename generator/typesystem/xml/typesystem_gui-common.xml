@@ -1664,7 +1664,7 @@
     <object-type name="QFontComboBox"/>
     <object-type name="QFontDialog" />
 
-    <object-type name="QGraphicsEllipseItem" delete-in-main-thread="yes"/>
+    <object-type name="QGraphicsEllipseItem" polymorphic-id-expression="%1-&gt;type() == QGraphicsEllipseItem::Type" delete-in-main-thread="yes"/>
     <object-type name="QGraphicsItemAnimation" >
         <modify-function signature="setItem(QGraphicsItem*)">
             <modify-argument index="1">
@@ -1677,7 +1677,7 @@
             </modify-argument>
         </modify-function>
     </object-type>
-    <object-type name="QGraphicsItemGroup" delete-in-main-thread="yes">
+    <object-type name="QGraphicsItemGroup" polymorphic-id-expression="%1-&gt;type() == QGraphicsItemGroup::Type" delete-in-main-thread="yes">
         <modify-function signature="matrix()const" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="resetMatrix()" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="sceneMatrix()const" remove="all"/> <!--### Obsolete in 4.3-->
@@ -1688,23 +1688,23 @@
             </modify-argument>
         </modify-function>
     </object-type>
-    <object-type name="QGraphicsLineItem" delete-in-main-thread="yes">
+    <object-type name="QGraphicsLineItem" polymorphic-id-expression="%1-&gt;type() == QGraphicsLineItem::Type" delete-in-main-thread="yes">
         <modify-function signature="matrix()const" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="resetMatrix()" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="sceneMatrix()const" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="setMatrix(QMatrix, bool)" remove="all"/> <!--### Obsolete in 4.3-->
     </object-type>
-    <object-type name="QGraphicsPathItem" delete-in-main-thread="yes"/>
+    <object-type name="QGraphicsPathItem" polymorphic-id-expression="%1-&gt;type() == QGraphicsPathItem::Type" delete-in-main-thread="yes"/>
 
-    <object-type name="QGraphicsPixmapItem" delete-in-main-thread="yes">
+    <object-type name="QGraphicsPixmapItem" polymorphic-id-expression="%1-&gt;type() == QGraphicsPixmapItem::Type" delete-in-main-thread="yes">
         <modify-function signature="matrix()const" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="resetMatrix()" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="sceneMatrix()const" remove="all"/> <!--### Obsolete in 4.3-->
         <modify-function signature="setMatrix(QMatrix, bool)" remove="all"/> <!--### Obsolete in 4.3-->
     </object-type>
-    <object-type name="QGraphicsPolygonItem" delete-in-main-thread="yes"/>
-    <object-type name="QGraphicsRectItem" delete-in-main-thread="yes"/>
-    <object-type name="QGraphicsSimpleTextItem" delete-in-main-thread="yes"/>
+    <object-type name="QGraphicsPolygonItem" polymorphic-id-expression="%1-&gt;type() == QGraphicsPolygonItem::Type" delete-in-main-thread="yes"/>
+    <object-type name="QGraphicsRectItem" polymorphic-id-expression="%1-&gt;type() == QGraphicsRectItem::Type" delete-in-main-thread="yes"/>
+    <object-type name="QGraphicsSimpleTextItem" polymorphic-id-expression="%1-&gt;type() == QGraphicsSimpleTextItem::Type" delete-in-main-thread="yes"/>
     <object-type name="QHBoxLayout"/>
     <object-type name="QHeaderView">
         <modify-function signature="initStyleOption(QStyleOptionHeader*)const">

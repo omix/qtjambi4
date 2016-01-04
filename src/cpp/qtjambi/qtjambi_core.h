@@ -704,6 +704,8 @@ QTJAMBI_EXPORT int qtjambi_vm_shutdown_get();
 QTJAMBI_EXPORT void qtjambi_vm_shutdown_set(int new_value);
 QTJAMBI_EXPORT void qtjambi_shutdown();
 
+QTJAMBI_EXPORT void qtjambi_moveSignalWrapperToThread(QObject* object, QThread* thread);
+
 /* qtjambilink.cpp */
 QTJAMBI_EXPORT int qtjambi_object_count_get(int arg0, int arg1);
 QTJAMBI_EXPORT int qtjambi_object_cache_mode_get();

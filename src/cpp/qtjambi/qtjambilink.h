@@ -334,7 +334,7 @@ public:
 
     /* Returns the pointer value for the signal wrapper, will assert if pointer is not a QObject */
     inline QObject *signalWrapper() const { Q_ASSERT(isQObject()); return m_wrapper; }
-    inline void setSignalWrapper(QObject *ptr) { m_wrapper = ptr; }
+    void setSignalWrapper(QObject *ptr);
 
     inline jobject javaObject(JNIEnv *env) const;
     /* Obviously don't go changing it */

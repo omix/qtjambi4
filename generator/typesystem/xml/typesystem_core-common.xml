@@ -1257,17 +1257,30 @@
         </modify-function>
         <modify-function signature="moveToThread(QThread*)">
             <inject-code class="native">
-            if(!__qt_this-&gt;isWidgetType()){
-                QtJambiLink *link = QtJambiLink::findLinkForQObject(__qt_this);
-                if(link!=0 &amp;&amp; link-&gt;signalWrapper()!=0){
-                    link-&gt;signalWrapper()-&gt;moveToThread(__qt_thread0);
-                }
-            }
+			if (__qt_this->thread() == __qt_thread0) {
+				return;
+			}
+			if (__qt_this->thread() != QThread::currentThread()) {
+				qWarning("QObject::moveToThread: Current thread (%p) is not the object's thread (%p).\n"
+						 "Cannot move to target thread (%p)\n",
+						 QThread::currentThread(), __qt_this->thread(), __qt_thread0);
+				return;
+			}
+			if (__qt_this->parent()) {
+		        qWarning("QObject::moveToThread: Cannot move objects with a parent");
+				return;
+			}
+			if (__qt_this->isWidgetType()) {
+		        qWarning("QObject::moveToThread: Widgets cannot be moved to a new thread");
+				return;
+			}
+			qtjambi_moveSignalWrapperToThread(__qt_this, __qt_thread0);
             </inject-code>
         </modify-function>
 
         <extra-includes>
         <include file-name="QVarLengthArray" location="global"/>
+        <include file-name="QThread" location="global"/>
         </extra-includes>
 
     </object-type>

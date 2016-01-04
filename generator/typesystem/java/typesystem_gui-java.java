@@ -1759,7 +1759,6 @@ class QAbstractTextDocumentLayout___ extends QAbstractTextDocumentLayout {
          * @param objectType The type for which to register a handler.
          * @param component The handler for the given type.
          **/
-        @SuppressWarnings("deprecated")
         public final void registerHandler(int objectType, QTextObjectInterface component) {
             registerHandler(objectType, (com.trolltech.qt.core.QObject) component);
         }
