@@ -1392,7 +1392,11 @@ void CppImplGenerator::writeShellFunction(QTextStream &s, const AbstractMetaFunc
 
                 // FIXME: Use helper method
                 // Raise exception ?  Maybe this should be QtJambiNoNativeException
-                s << INDENT << "qtjambishell_throw_nullpointerexception(__jni_env, " << "\"" << implementor->name() << "::" << java_function_signature << "\"" << ");" << endl;
+                if(implementor->isQObject()){
+                    s << INDENT << "qtjambishell_throw_nullpointerexception(__jni_env, qPrintable(QString(" << "\"" << implementor->name() << "::" << java_function_signature << ": The java object has been deleted prior to the native object [class=\\\"%1\\\" objectName=\\\"%2\\\"].\").arg(QString(metaObject()->className())).arg(objectName()))" << ");" << endl;
+                }else{
+                    s << INDENT << "qtjambishell_throw_nullpointerexception(__jni_env, " << "\"" << implementor->name() << "::" << java_function_signature << ": The java object has been deleted prior to the native object.\"" << ");" << endl;
+                }
                 if(function_type)
                     s << INDENT << "__qt_return_value = " << default_return_statement_qt(function_type, Generator::NoReturnStatement) << ";" << endl;
             }                
