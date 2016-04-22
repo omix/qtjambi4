@@ -55,4 +55,8 @@ public class QMarginsF {
     public double top;
     public double right;
     public double bottom;
+    public double left(){return left;}
+    public double top(){return top;}
+    public double right(){return right;}
+    public double bottom(){return bottom;}
 }

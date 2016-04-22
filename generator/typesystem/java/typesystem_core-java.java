@@ -370,8 +370,11 @@ class QCoreApplication___ extends QCoreApplication {
 
 class QTranslator___ extends QTranslator {
         public final boolean load(byte data[]) {
-            return load(com.trolltech.qt.internal.QtJambiInternal.byteArrayToNativePointer(data), data.length);
+            __rc_nativePointer = com.trolltech.qt.internal.QtJambiInternal.byteArrayToNativePointer(data);
+            return load(__rc_nativePointer, data.length);
         }
+        // The data is not copied. The caller must be able to guarantee that data will not be deleted or modified.
+        private QNativePointer __rc_nativePointer;
 }// class
 
 class QProcess___ extends QProcess {

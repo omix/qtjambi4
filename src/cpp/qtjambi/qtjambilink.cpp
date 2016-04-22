@@ -717,6 +717,8 @@ void QtJambiLink::setMetaObject(const QMetaObject *mo) const
 
 
 void QtJambiLink::setSignalWrapper(QObject *ptr) {
+    Q_ASSERT(isQObject());
+
     QObject* qobj = qobject();
     if(ptr && qobj && ptr->thread()!=qobj->thread()){
         if(ptr->thread()==QThread::currentThread()){

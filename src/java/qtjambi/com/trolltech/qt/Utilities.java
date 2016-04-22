@@ -346,6 +346,10 @@ public class Utilities {
     public static boolean isAvailableQtLibrary(String library) {
         return NativeLibraryManager.isAvailableQtLibrary(library, VERSION_MAJOR_STRING);
     }
+    
+    public static boolean isAvailableQtLibrary(String library, String versionString) {
+        return NativeLibraryManager.isAvailableQtLibrary(library, versionString);
+    }
 
     public static void loadQtLibrary(String library) {
         loadQtLibrary(library, VERSION_MAJOR_STRING);

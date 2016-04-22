@@ -35,7 +35,7 @@ DEPENDPATH += $$PWD/..
 
 macx:{
     # if(!defined(QMAKE_MAC_SDK)) { }
-    QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.9.sdk
+    QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.11.sdk
     #QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.4
 #    LIBS += -framework JavaVM
     INCLUDEPATH += $$quote($$JAVA_HOME_TARGET/include)

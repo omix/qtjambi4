@@ -441,13 +441,18 @@ public class NativeLibraryManager {
     /**
      * Loads a library with name specified in <code>library</code>.
      * The library name will be expanded to the default shared library
-     * name for a given platform, so the name "QtCore" and version "4" will be
+     * name for a given platform, so the name "QtCore" and version "4" and "5" will be
      * expanded like this:
      *
      * <ll>
      *   <li> Windows: QtCore4.dll
      *   <li> Linux / Unix: libQtCore.so.4
      *   <li> Mac OS X: libQtCore.4.dylib
+     * </ll>
+     * <ll>
+     *   <li> Windows: Qt5Core.dll
+     *   <li> Linux / Unix: libQt5Core.so.5
+     *   <li> Mac OS X: libQt5Core.5.dylib
      * </ll>
      *
      * When using loading libraries from the filesystem, this method
@@ -469,18 +474,20 @@ public class NativeLibraryManager {
             return false;
         for(DeploymentSpec deploymentSpec : deploymentSpecA) {
             List<LibraryEntry> libraries = deploymentSpec.getLibraries();
-            for(LibraryEntry libraryEntry : libraries) {
-                String name = libraryEntry.getName();  // name="lib/libQtFoo.so.4"
-                if(name == null)
-                    continue;
-                if(lib.equals(name))      // lib=="lib/libQtFoo.so.4"
-                    return true;
-                String[] pathA = RetroTranslatorHelper.split(name, "/");
-                if(pathA == null || pathA.length == 0)
-                    continue;
-                String lastPart = pathA[pathA.length - 1];
-                if(lib.equals(lastPart))  // lib=="libQtFoo.so.4"
-                    return true;
+            if(libraries!=null){
+	            for(LibraryEntry libraryEntry : libraries) {
+	                String name = libraryEntry.getName();  // name="lib/libQtFoo.so.4"
+	                if(name == null)
+	                    continue;
+	                if(lib.equals(name))      // lib=="lib/libQtFoo.so.4"
+	                    return true;
+	                String[] pathA = RetroTranslatorHelper.split(name, "/");
+	                if(pathA == null || pathA.length == 0)
+	                    continue;
+	                String lastPart = pathA[pathA.length - 1];
+	                if(lib.equals(lastPart))  // lib=="libQtFoo.so.4"
+	                    return true;
+	            }
             }
         }
         return false;
@@ -911,7 +918,7 @@ public class NativeLibraryManager {
 
     private static String jniLibraryName(String lib, String version) {
         String dotVersion;
-        if(version != null) {
+        if(version != null && !version.isEmpty()) {
             dotVersion = "." + version;
         } else {
             version = "";
@@ -947,12 +954,18 @@ public class NativeLibraryManager {
 
     private static String qtLibraryName(String lib, String version) {
         String dotVersion;
-        if(version != null) {
+        if(version != null && !version.isEmpty()) {
             dotVersion = "." + version;
         } else {
             version = "";
             dotVersion = "";
         }
+        if("5".equals(version)){
+    		if(lib.startsWith("Qt") && !lib.startsWith("Qt5")){
+    			lib = "Qt5"+lib.substring(2);
+    		}
+    		version = "";
+    	}
         switch (Utilities.operatingSystem) {
         case Windows:
             return Utilities.configuration == Utilities.Configuration.Debug

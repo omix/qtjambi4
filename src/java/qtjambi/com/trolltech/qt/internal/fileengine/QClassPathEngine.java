@@ -242,12 +242,12 @@ public class QClassPathEngine extends QAbstractFileEngine {
                 // Validate the URL we build is well-formed
                 // FIXME: file://
                 String tmpPath = "file:" + path;
-String xPath = path.replace('\\', '/');
-String xPrefix;
-if(path.length() > 0 && xPath.charAt(0) != '/')
-    xPrefix = "file:///";
-else
-    xPrefix = "file://";
+				String xPath = path.replace('\\', '/');
+				String xPrefix;
+				if(path.length() > 0 && xPath.charAt(0) != '/')
+				    xPrefix = "file:///";
+				else
+				    xPrefix = "file://";
                 String newTmpPath = xPrefix;
                 if(File.separatorChar == '\\')
                     newTmpPath += path.replace('\\', '/');  // windows

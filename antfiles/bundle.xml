@@ -11,6 +11,16 @@
   -->
   <target name="library.native.qmake" depends="init.build" description="Runs qmake on the Qt Jambi native library">
       <mkdir dir="${qtjambi.builddir}"/>
+		<condition property="java.replace.sdk" value="true">
+			<and>
+				<os family="mac"/>
+				<contains string="${osx.sdk}" substring="MacOSX"/>
+				<not>
+					<available file="${basedir}/src/cpp/java.pro.orig" type="file"/>
+				</not>
+			</and>
+		</condition>
+		<antcall target="sdkfix.java"/>
       <qmake recursive="true"
           dir="${qtjambi.builddir}"
           pro="${basedir}/src/cpp/java.pro"
@@ -19,6 +29,11 @@
           debugTools="${qtjambi.debug-tools}"
           qmakebinary="${qtjambi.qt.qmake.abspath}"/>
   </target>
+  
+	<target name="sdkfix.java" if="java.replace.sdk">
+		<copy file="${basedir}/src/cpp/java.pro" tofile="${basedir}/src/cpp/java.pro.orig"/>
+		<replace file="${basedir}/src/cpp/java.pro" token="/Developer/SDKs/MacOSX10.11.sdk" value="/Developer/SDKs/${osx.sdk}"/>
+	</target>
 
   <!--
       Runs make for Jambi source
@@ -287,7 +302,7 @@
                           outdir="${outputDir}/platform-output-debug"
                           debug="true">
 
-      <directory name="" rootPath="${qtjambi.macosx.qtmenunib.dir}" destSubdir="lib/Resources" recursive="true" />
+      <directory name="" rootPath="${qtjambi.macosx.qtmenunib.dir}" destSubdir="lib" recursive="true" />
 
       <!-- Qt Libraries -->
       <library name="QtCore"               dsoVersion="${qt.version.major}"  type="qt"  rootPath="${qtjambi.qt.libdir}"     destSubdir="lib" if="${qtjambi.core.debug}"/>
@@ -501,7 +516,7 @@
         <attribute name="X-QtJambi-SoName-Version" value="${qtjambi.soname.version.major}"/>
       </manifest>
     </jar>
-    <copy file="${destination-file}" tofile="${jardir}/qtjambi-native.jar"/>
+    <copy file="${destination-file}" tofile="${jardir}/qtjambi-native_debug.jar"/>
 
   </target>
 </project>

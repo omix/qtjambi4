@@ -30,11 +30,36 @@
          above since QtJambi does not appear to need full header file
          qualification.
       -->
+	  
+	<target name="sdkfix.generator" if="generator.replace.sdk">
+		<copy file="${basedir}/generator/generator.pro" tofile="${basedir}/generator/generator.pro.orig"/>
+		<replace file="${basedir}/generator/generator.pro" token="/Developer/SDKs/MacOSX10.11.sdk" value="/Developer/SDKs/${osx.sdk}"/>
+	</target>
 
     <target name="tools.generator.qmake" depends="init.build">
         <mkdir dir="${generator.builddir}"/>
+		<condition property="generator.replace.sdk" value="true">
+			<and>
+				<os family="mac"/>
+				<contains string="${osx.sdk}" substring="MacOSX"/>
+				<not>
+					<available file="${basedir}/generator/generator.pro.orig" type="file"/>
+				</not>
+			</and>
+		</condition>
+		<antcall target="sdkfix.generator"/>
+		
+		<condition property="generator.configuration" value="debug" else="release">
+			<or>
+				<equals arg1="${qtjambi.configuration}" arg2="debug"/>
+				<and>
+					<equals arg1="${qtjambi.configuration}" arg2="debug_and_release"/>
+					<equals arg1="${generator.configuration}" arg2="debug"/>
+				</and>
+			</or>
+		</condition>
         <qmake dir="${generator.builddir}" pro="${basedir}/generator/generator.pro"
-                config="${qtjambi.configuration}"
+                config="${generator.configuration}"
                 qmakebinary="${tools.qt.qmake.abspath}"/>
     </target>
 

@@ -75,7 +75,7 @@
 #endif
 
 #if defined Q_OS_MAC
-#  include <JavaVM/jni.h>
+#  include <jni.h>
 #else
 #  include <jni.h>
 #endif
@@ -100,6 +100,6 @@ typedef void (*PtrDestructorFunction)(void *);
     #define snprintf _snprintf
 #endif
 
-QTJAMBI_EXPORT JNIEnv *qtjambi_current_environment();
+extern "C" QTJAMBI_EXPORT JNIEnv *qtjambi_current_environment();
 
 #endif // QTJAMBI_GLOBAL_H

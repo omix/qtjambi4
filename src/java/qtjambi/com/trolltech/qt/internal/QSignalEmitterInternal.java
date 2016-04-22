@@ -409,6 +409,7 @@ public abstract class QSignalEmitterInternal {
         @SuppressWarnings({ "rawtypes", "unchecked" })
 		protected synchronized final void emit_helper(Object ... args) {
         	
+            // #### THIS NO LONGER WORKS IN Qt5 ####
         	// try to connect signal to native cpp signal if not yet happened.
         	if (!connectedToCpp) {
                 connectedToCpp = true;
@@ -426,11 +427,13 @@ public abstract class QSignalEmitterInternal {
                 return ;
             }
 
+            // #### THIS NO LONGER WORKS IN Qt5 ####
             // If the signal is generated, it will automatically be connected
             // to the original C++ function for the signal, so the native
             // signal will be emitted by this mechanism. In other cases, we
             // need to make magic and dynamically fake a signal emission
             // in c++ for the signal.
+			// #### THIS NO LONGER WORKS IN Qt5 ####
             if (!isGenerated() && QSignalEmitterInternal.this instanceof QObject) {
                 MetaObjectTools.emitNativeSignal((QObject) QSignalEmitterInternal.this, name() + "(" + signalParameters() + ")", cppSignalSignature(), args);
             }

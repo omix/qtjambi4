@@ -124,10 +124,25 @@
 
     <target name="tools.juic.qmake" depends="log, init.build">
         <mkdir dir="${juic.builddir}"/>
+		<condition property="juic.replace.sdk" value="true">
+			<and>
+				<os family="mac"/>
+				<contains string="${osx.sdk}" substring="MacOSX"/>
+				<not>
+					<available file="${basedir}/juic/juic.pro.orig" type="file"/>
+				</not>
+			</and>
+		</condition>
+		<antcall target="sdkfix.juic"/>
         <qmake dir="${juic.builddir}" pro="${basedir}/juic/juic.pro"
                 config="${qtjambi.configuration}"
                 qmakebinary="${tools.qt.qmake.abspath}"/>
     </target>
+	
+	<target name="sdkfix.juic" if="juic.replace.sdk">
+		<copy file="${basedir}/juic/juic.pro.pro" tofile="${basedir}/juic/juic.pro.pro.orig"/>
+		<replace file="${basedir}/juic/juic.pro" token="/Developer/SDKs/MacOSX10.11.sdk" value="/Developer/SDKs/${osx.sdk}"/>
+	</target>
 
     <target name="tools.juic.make" depends="log, tools.juic.qmake">
         <make dir="${juic.builddir}" target="${qtjambi.qmake.target.default}"/>

@@ -196,8 +196,8 @@ QTJAMBI_EXPORT void qtjambi_resolve_polymorphic_id(const char *lookup, const voi
  * @param vm_parameters allows to commit parameters for the vm
  * @param ignoreUnrecognizedOptions can be set true in order to allow the vm to ignore invalid -X options
  */
-QTJAMBI_EXPORT bool qtjambi_initialize_vm(const QStringList & vm_parameters = QStringList(), const bool ignoreUnrecognizedOptions = false);
-QTJAMBI_EXPORT bool qtjambi_destroy_vm();
+extern "C" QTJAMBI_EXPORT bool qtjambi_initialize_vm(const QStringList & vm_parameters = QStringList(), const bool ignoreUnrecognizedOptions = false);
+extern "C" QTJAMBI_EXPORT bool qtjambi_destroy_vm();
 extern "C" QTJAMBI_EXPORT void qtjambi_set_vm_location_override(const QString &location);
 
 typedef jint (JNICALL *VfPrintFHook)(FILE*, const char*,va_list);
@@ -222,11 +222,11 @@ QTJAMBI_EXPORT jobject qtjambi_from_qvariant(JNIEnv *env, const QVariant &qt_var
 
 QTJAMBI_EXPORT void *qtjambi_to_object(JNIEnv *env, jobject java_object);
 
-QTJAMBI_EXPORT QObject *qtjambi_to_qobject(JNIEnv *env, jobject java_object);
+extern "C" QTJAMBI_EXPORT QObject *qtjambi_to_qobject(JNIEnv *env, jobject java_object);
 
 QTJAMBI_EXPORT int qtjambi_to_enum(JNIEnv *env, jobject java_object);
 
-QTJAMBI_EXPORT QString qtjambi_to_qstring(JNIEnv *env, jstring java_string);
+extern "C" QTJAMBI_EXPORT QString qtjambi_to_qstring(JNIEnv *env, jstring java_string);
 
 QTJAMBI_EXPORT JObjectWrapper qtjambi_to_jobjectwrapper(JNIEnv *env, jobject java_object);
 
@@ -325,6 +325,7 @@ QTJAMBI_EXPORT
 jobject qtjambi_from_object(JNIEnv *env, const void *qt_object, const char *className,
                             const char *packageName, bool makeCopyOfValueTypes);
 
+extern "C"
 QTJAMBI_EXPORT
 jobject qtjambi_from_qobject(JNIEnv *env, QObject *qt_object, const char *className, const char *packageName);
 
@@ -344,6 +345,7 @@ QTJAMBI_EXPORT int qtjambi_to_enumerator(JNIEnv *env, jobject value);
 QTJAMBI_EXPORT
 jstring qtjambi_from_qstringref(JNIEnv *env, const QStringRef &s);
 
+extern "C"
 QTJAMBI_EXPORT
 jstring qtjambi_from_qstring(JNIEnv *env, const QString &s);
 
@@ -702,7 +704,7 @@ QTJAMBI_EXPORT QVarLengthArray<jvalue> qtjambi_from_jobjectArray(JNIEnv *env, jo
 
 QTJAMBI_EXPORT int qtjambi_vm_shutdown_get();
 QTJAMBI_EXPORT void qtjambi_vm_shutdown_set(int new_value);
-QTJAMBI_EXPORT void qtjambi_shutdown();
+extern "C" QTJAMBI_EXPORT void qtjambi_shutdown();
 
 QTJAMBI_EXPORT void qtjambi_moveSignalWrapperToThread(QObject* object, QThread* thread);
 
