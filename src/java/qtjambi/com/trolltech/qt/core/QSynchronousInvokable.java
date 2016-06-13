@@ -44,8 +44,6 @@
 
 package com.trolltech.qt.core;
 
-import com.trolltech.qt.gui.QApplication;
-
 /**
  * The QSynchronousInvokable class is used internally by QCoreApplication.invokeLaterAndWait()
  * to synchronously execute a java.lang.Runnable from the gui-thread.
@@ -64,7 +62,7 @@ class QSynchronousInvokable extends QObject {
             this.runnable = runnable;
         }
 
-        if (runnable == null || Thread.currentThread().equals(QApplication.instance().thread()))
+        if (runnable == null || Thread.currentThread().equals(QCoreApplication.instance().thread()))
             invoked = true;
 
     }
@@ -75,8 +73,16 @@ class QSynchronousInvokable extends QObject {
             try {
                 wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+				java.util.logging.Logger.getGlobal().logp(java.util.logging.Level.WARNING, this.getClass().getName(), "waitForInvoked()", "InterruptedException", e);
             }
+        }
+
+        invoked = false;
+    }
+	
+	synchronized void waitForInvokedOrInterrupt() throws InterruptedException {
+        while (!invoked) {
+            wait();
         }
 
         invoked = false;
